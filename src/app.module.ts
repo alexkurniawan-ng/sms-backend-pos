@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { InvoicesModule } from './services/invoices/invoice.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         timezone: 'Z',
       }),
     }),
+    InvoicesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
