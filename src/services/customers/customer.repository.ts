@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DataSource, DeepPartial, QueryRunner, Repository } from 'typeorm';
+import { DataSource, DeepPartial, Like, QueryRunner, Repository } from 'typeorm';
 import { Customer } from './customer.entity';
 
 @Injectable()
@@ -16,5 +16,14 @@ export class CustomerRepository extends Repository<Customer> {
 
   findAll(): Promise<Customer[]> {
     return this.find();
+  }
+
+  findByNameLike(customerName: string): Promise<Customer[]> {
+    return this.find({
+      where: {
+        customerName: Like(`%${customerName}%`),
+      },
+      order: { customerName: 'ASC' },
+    });
   }
 }
