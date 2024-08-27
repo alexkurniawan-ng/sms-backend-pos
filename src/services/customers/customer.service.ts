@@ -13,7 +13,6 @@ export class CustomerService {
 
   public async getCustomerBySearch(name: string): Promise<CustomerSearchResponse[]> {
     const customers = await this.customerRepository.findByNameLike(name);
-    console.log({ customers })
     return this.convertCustomerListToCustomerSearchResponse(customers);
   }
 

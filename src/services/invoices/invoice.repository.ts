@@ -40,4 +40,10 @@ export class InvoiceRepository extends Repository<Invoice> {
       order: { invoiceDate: 'DESC' },
     });
   }
+
+  findById(id: string): Promise<Invoice> {
+    return this.findOne({
+      where: { id },
+    });
+  }
 }

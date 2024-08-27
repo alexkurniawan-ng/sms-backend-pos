@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, DeepPartial, Like, QueryRunner, Repository } from 'typeorm';
 import { Product } from './product.entity';
+import { Unit } from '../units/unit.entity';
 
 @Injectable()
 export class ProductRepository extends Repository<Product> {
@@ -20,6 +21,19 @@ export class ProductRepository extends Repository<Product> {
         productName: Like(`%${productName}%`),
       },
       order: { productStock: 'DESC' },
+    });
+  }
+}
+
+@Injectable()
+export class UnitRepository extends Repository<Unit> {
+  constructor(private dataSource: DataSource) {
+    super(Unit, dataSource.createEntityManager());
+  }
+
+  async findUnitsById(id: string): Promise<Unit> {
+    return this.findOne({
+      where: { id },
     });
   }
 }

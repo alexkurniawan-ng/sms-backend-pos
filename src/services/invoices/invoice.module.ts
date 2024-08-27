@@ -8,11 +8,13 @@ import { InvoiceRepository } from './invoice.repository';
 import { Customer } from '../customers/customer.entity';
 import { CustomerRepository } from '../customers/customer.repository';
 import { User, UserRepository } from '../users';
+import { InvoiceProduct } from '../invoice-product/invoice-product.entity';
+import { InvoiceProductRepository } from '../invoice-product/invoice-product.repository';
 
 @Module({
-  imports: [ConfigModule.forRoot(), TypeOrmModule.forFeature([Invoice, Customer, User])],
+  imports: [ConfigModule.forRoot(), TypeOrmModule.forFeature([Invoice, InvoiceProduct, Customer, User])],
   controllers: [InvoicesController],
-  providers: [InvoicesService, InvoiceRepository, CustomerRepository, UserRepository],
+  providers: [InvoicesService, InvoiceRepository, InvoiceProductRepository, CustomerRepository, UserRepository],
   exports: [TypeOrmModule],
 })
 export class InvoicesModule {}

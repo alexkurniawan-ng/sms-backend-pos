@@ -1,4 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { InvoiceProduct } from '../invoice-product/invoice-product.entity';
+import { Unit } from '../units/unit.entity';
 
 @Entity('products')
 export class Product {
@@ -37,4 +39,11 @@ export class Product {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @OneToOne(() => InvoiceProduct, (invoiceproduct) => invoiceproduct.product)
+  invoiceProduct: InvoiceProduct;
+
+  @OneToOne(() => Unit, (unit) => unit.product)
+  @JoinColumn({ name: 'unit_id' })
+  unit: Unit;
 }

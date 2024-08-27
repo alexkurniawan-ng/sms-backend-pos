@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Customer } from '../customers/customer.entity';
+import { InvoiceProduct } from '../invoice-product/invoice-product.entity';
 
 @Entity('invoices')
 export class Invoice {
@@ -69,4 +70,7 @@ export class Invoice {
   @ManyToOne(() => Customer, (customer) => customer.invoices)
   @JoinColumn({ name: 'customer_id' })
   customer: Customer;
+
+  @OneToMany(() => InvoiceProduct, (invoiceproduct) => invoiceproduct.invoice)
+  invoiceProducts: InvoiceProduct[];
 }

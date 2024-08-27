@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Invoice } from '../invoices/invoice.entity';
+import { InvoiceProduct } from '../invoice-product/invoice-product.entity';
 
 @Entity('customers')
 export class Customer {
